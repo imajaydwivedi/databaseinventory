@@ -8,5 +8,5 @@ password = 'Pa$$w0rd'
 SmtpHost = 'smtp.gmail.com'
 SmtpPort = 587
 EmailUser = 'sqlagentservice@gmail.com'
-EmailPassword = 'ruwywxxxshelogdh'
+EmailPassword = 'kl;lkjalskjdf;kl'
 AdminEmail = 'ajay.dwivedi2007@gmail.com'  # 'itsqldba@tivo.com'
