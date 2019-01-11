@@ -1,0 +1,75 @@
+{% extends "mssql/base.html" %}
+{% load staticfiles %}
+
+{% block block_navigation %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:index' %}">MSSQL</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:server' %}">Server</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Server Details</li>
+    </ol>
+  </nav>
+{% endblock block_navigation %}
+
+{% block block_body %}
+  <div class="container">
+    <div class="card">
+      <h5 class="card-header bg-success">Welcome to Server Detail Page</h5>
+      <div class="card-body">
+        <h5 class="card-title text-primary">Server details:</h5>
+        <p class="card-text">
+          <table class="table table-bordered table-striped dbinventorytable-detail">
+            <tbody>
+              <tr class=""><td>ServerID</td><td>{{server_detail.serverid}}</td></tr>
+              <tr class=""><td>ServerName</td><td>{{server_detail.servername}}</td></tr>
+              <tr class=""><td>ApplicationId</td><td>{{server_detail.applicationid}}</td></tr>
+              <tr class=""><td>EnvironmentType</td><td>{{server_detail.environmenttype}}</td></tr>
+              <tr class=""><td>FQDN</td><td>{{server_detail.fqdn}}</td></tr>
+              <tr class=""><td>IPAddress</td><td>{{server_detail.ipaddress}}</td></tr>
+              <tr class=""><td>Domain</td><td>{{server_detail.domain}}</td></tr>
+              <tr class=""><td>IsStandaloneServer</td><td>{{server_detail.isstandaloneserver}}</td></tr>
+              <tr class=""><td>IsSqlClusterNode</td><td>{{server_detail.issqlclusternode}}</td></tr>
+              <tr class=""><td>IsAgNode</td><td>{{server_detail.isagnode}}</td></tr>
+              <tr class=""><td>IsWSFC</td><td>{{server_detail.iswsfc}}</td></tr>
+              <tr class=""><td>IsSqlCluster</td><td>{{server_detail.issqlcluster}}</td></tr>
+              <tr class=""><td>IsAG</td><td>{{server_detail.isag}}</td></tr>
+              <tr class=""><td>ParentServerId</td><td>{{server_detail.parentserverid}}</td></tr>
+              <tr class=""><td>OS</td><td>{{server_detail.os}}</td></tr>
+              <tr class=""><td>SPVersion</td><td>{{server_detail.spversion}}</td></tr>
+              <tr class=""><td>IsVM</td><td>{{server_detail.isvm}}</td></tr>
+              <tr class=""><td>IsPhysical</td><td>{{server_detail.isphysical}}</td></tr>
+              <tr class=""><td>Manufacturer</td><td>{{server_detail.manufacturer}}</td></tr>
+              <tr class=""><td>Model</td><td>{{server_detail.model}}</td></tr>
+              <tr class=""><td>RAM</td><td>{{server_detail.ram}}</td></tr>
+              <tr class=""><td>CPU</td><td>{{server_detail.cpu}}</td></tr>
+              <tr class=""><td>Powerplan</td><td>{{server_detail.powerplan}}</td></tr>
+              <tr class=""><td>OSArchitecture</td><td>{{server_detail.osarchitecture}}</td></tr>
+              <tr class=""><td>ISDecom</td><td>{{server_detail.isdecom}}</td></tr>
+              <tr class=""><td>DecomDate</td><td>{{server_detail.decomdate}}</td></tr>
+              <tr class=""><td>GeneralDescription</td><td>{{server_detail.generaldescription}}</td></tr>
+              <tr class=""><td>CollectionDate</td><td>{{server_detail.collectiondate}}</td></tr>
+              <tr class=""><td>CollectedBy</td><td>{{server_detail.collectedby}}</td></tr>
+              <tr class=""><td>UpdatedDate</td><td>{{server_detail.updateddate}}</td></tr>
+              <tr class=""><td>UpdatedBy</td><td>{{server_detail.updatedby}}</td></tr>
+            </tbody>
+          </table>
+
+          <h6>SqlInstances:</h6>
+          <ul>
+          {% for instance in server_detail.sqlinstances.all %}
+            <li><a href="#">{{instance.sqlinstance}}</a></li>
+          {% endfor %}
+          <ul>
+          
+          <p>
+          <div class="container">
+            <a href="{% url 'mssql:serverupdate' pk=server_detail.pk %}" class="btn btn-warning">Update</a>
+            <a href="{% url 'mssql:serverdelete' pk=server_detail.pk %}" class="btn btn-danger">Delete</a>
+          </div>
+          </p>
+        </p>
+      </div>
+    </div>
+  </div>
+{% endblock block_body %}

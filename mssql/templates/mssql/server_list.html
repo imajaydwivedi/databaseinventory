@@ -1,0 +1,146 @@
+{% extends "mssql/mssql_base.html" %}
+{% load staticfiles %}
+
+{% block block_navigation %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:index' %}">MSSQL</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Server</li>
+    </ol>
+  </nav>
+{% endblock block_navigation %}
+
+{% block block_body %}
+<div class="container-fluid">
+  {% if servers %}
+    <div class="table-responsive">
+      <!-- <table id="tivotabledata" class="table table-bordered table-hover table-sm tivotabledata">  -->
+      <table id="dbinventorytable" class="dbinventorytable-list">  
+        <thead>
+          <tr class="table-primary">
+            <th scope="col">ServerID</th>
+            <th scope="col">ServerName</th>
+            <th scope="col">ApplicationId</th>
+            <th scope="col">EnvironmentType</th>
+            <th scope="col">FQDN</th>
+            <th scope="col">IPAddress</th>
+            <th scope="col">Domain</th>
+            <th scope="col">IsStandaloneServer</th>
+            <th scope="col">IsSqlClusterNode</th>
+            <th scope="col">IsAgNode</th>
+            <th scope="col">IsWSFC</th>
+            <th scope="col">IsSqlCluster</th>
+            <th scope="col">IsAG</th>
+            <th scope="col">ParentServerId</th>
+            <th scope="col">OS</th>
+            <th scope="col">SPVersion</th>
+            <th scope="col">IsVM</th>
+            <th scope="col">IsPhysical</th>
+            <th scope="col">Manufacturer</th>
+            <th scope="col">Model</th>
+            <th scope="col">RAM</th>
+            <th scope="col">CPU</th>
+            <th scope="col">Powerplan</th>
+            <th scope="col">OSArchitecture</th>
+            <th scope="col">ISDecom</th>
+            <th scope="col">DecomDate</th>
+            <th scope="col">GeneralDescription</th>
+            <th scope="col">CollectionDate</th>
+            <th scope="col">CollectedBy</th>
+            <th scope="col">UpdatedDate</th>
+            <th scope="col">UpdatedBy</th>
+          </tr>
+        </thead>
+        <tbody class="table-hover">
+        {% for server in servers %}
+          <tr>
+            <td><a href="{{server.serverid}}">{{server.serverid}}</a></td>
+            <td><a href="{{server.serverid}}">{{server.servername}}</a></td>
+            <td> 
+              {% if server.applicationid %}
+              <a href="{{server.applicationid}}">{{server.applicationid}}</a>
+              {% else %}
+                {{server.applicationid}}
+              {% endif %}
+            </td>
+            <td>{{server.environmenttype}}</td>
+            <td>{{server.fqdn}}</td>
+            <td>{{server.ipaddress}}</td>
+            <td>{{server.domain}}</td>
+            <td>{{server.isstandaloneserver}}</td>
+            <td>{{server.issqlclusternode}}</td>
+            <td>{{server.isagnode}}</td>
+            <td>{{server.iswsfc}}</td>
+            <td>{{server.issqlcluster}}</td>
+            <td>{{server.isag}}</td>
+            <td>
+              {% if server.parentserverid %}
+              <a href="{{server.parentserverid}}">{{server.parentserverid}}</a>
+              {% else %}
+                {{server.parentserverid}}
+              {% endif %}
+            </td>
+            <td>{{server.os}}</td>
+            <td>{{server.spversion}}</td>
+            <td>{{server.isvm}}</td>
+            <td>{{server.isphysical}}</td>
+            <td>{{server.manufacturer}}</td>
+            <td>{{server.model}}</td>
+            <td>{{server.ram}}</td>
+            <td>{{server.cpu}}</td>
+            <td>{{server.powerplan}}</td>
+            <td>{{server.osarchitecture}}</td>
+            <td>{{server.isdecom}}</td>
+            <td>{{server.decomdate}}</td>
+            <td>{{server.generaldescription}}</td>
+            <td>{{server.collectiondate}}</td>
+            <td>{{server.collectedby}}</td>
+            <td>{{server.updateddate}}</td>
+            <td>{{server.updatedby}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr class="table-primary">
+            <th scope="col">ServerID</th>
+            <th scope="col">ServerName</th>
+            <th scope="col">ApplicationId</th>
+            <th scope="col">EnvironmentType</th>
+            <th scope="col">FQDN</th>
+            <th scope="col">IPAddress</th>
+            <th scope="col">Domain</th>
+            <th scope="col">IsStandaloneServer</th>
+            <th scope="col">IsSqlClusterNode</th>
+            <th scope="col">IsAgNode</th>
+            <th scope="col">IsWSFC</th>
+            <th scope="col">IsSqlCluster</th>
+            <th scope="col">IsAG</th>
+            <th scope="col">ParentServerId</th>
+            <th scope="col">OS</th>
+            <th scope="col">SPVersion</th>
+            <th scope="col">IsVM</th>
+            <th scope="col">IsPhysical</th>
+            <th scope="col">Manufacturer</th>
+            <th scope="col">Model</th>
+            <th scope="col">RAM</th>
+            <th scope="col">CPU</th>
+            <th scope="col">Powerplan</th>
+            <th scope="col">OSArchitecture</th>
+            <th scope="col">ISDecom</th>
+            <th scope="col">DecomDate</th>
+            <th scope="col">GeneralDescription</th>
+            <th scope="col">CollectionDate</th>
+            <th scope="col">CollectedBy</th>
+            <th scope="col">UpdatedDate</th>
+            <th scope="col">UpdatedBy</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  {% else %}
+    <p> No data to display</p>
+  {% endif %}
+</div>
+
+{% endblock block_body %}

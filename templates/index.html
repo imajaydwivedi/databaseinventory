@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block block_body %}
+
+<div class="container">
+  <p>
+    <h4>Hi, below is the picture of Django himself!</h4>
+    <img src='{% static "images/django.jpg" %}' alt='Oh oh! Django picture should be here..'>
+  </p>
+</div>
+
+{% endblock block_body %}

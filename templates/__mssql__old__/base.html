@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block block_autoloader %}
+
+  <Link rel="stylesheet" type="text/css" href='{% static "css/datatables.min.css" %}' >
+  <script type="text/javascript" charset="utf8" src='{% static "javascript/datatables.min.js" %}'></script>
+  <script>
+    $(document).ready( function () {
+        $('#tivotabledata').DataTable({
+          //scrollY: 400,
+          select: true,
+          "lengthChange": true,
+          autoWidth: true,
+          fixedHeader: true,
+
+          columnDefs: [
+            {
+                targets: 0,
+                className: 'dt-body-center'
+            }
+          ]
+        });
+    } );
+
+  </script>
+
+{% endblock block_autoloader %}
+
+{% block block_post_autoloader %}
+<script>
+  $("#tivotabledata").addClass("tivotabledata cell-border compact hover order-column");
+
+</script>
+{% endblock block_post_autoloader %}

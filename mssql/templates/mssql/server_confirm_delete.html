@@ -1,0 +1,36 @@
+{% extends "mssql/mssql_base.html" %}
+{% load staticfiles %}
+
+
+{% block block_navigation %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:index' %}">MSSQL</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:server' %}">Server</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Delete</li>
+    </ol>
+  </nav>
+{% endblock block_navigation %}
+
+{% block block_body %}
+  <div class="container">
+    <div class="card">
+      <h5 class="alert alert-danger" role="alert">Confirm</h5>
+      <div class="card-body">
+        <div class="alert alert-warning" role="alert">
+          Tip! Instead of deleting the server, you can mark it as 'decommissioned'
+        </div>
+
+        <h3 class="card-title">Proceed to Delete Server [{{server.servername}}]?</h3>
+        
+        <form method="POST">
+          {% csrf_token %}
+          <input type="submit" class="btn btn-danger" value="Delete">
+          <a href="{% url 'mssql:serverdetail' pk=server.pk %}" class="btn btn-info">Cancel</a>
+        </form>
+      
+      </div>
+    </div>
+  </div>
+{% endblock block_body %}

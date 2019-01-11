@@ -1,0 +1,10 @@
+# *********************************************************************
+fields.E304 Reverse accessor clashes in Django
+      # *********************************************************************
+mssql.Instance.aglistenername: (fields.E304) Reverse accessor for 'Instance.aglistenername' clashes with reverse accessor for 'Instance.hapartner'.
+        HINT: Add or change a related_name argument to the definition for 'Instance.aglistenername' or 'Instance.hapartner'.
+mssql.Instance.hapartner: (fields.E304) Reverse accessor for 'Instance.hapartner' clashes with reverse accessor for 'Instance.aglistenername'.
+        HINT: Add or change a related_name argument to the definition for 'Instance.hapartner' or 'Instance.aglistenername'.
+
+
+https://stackoverflow.com/q/41595364/4449743

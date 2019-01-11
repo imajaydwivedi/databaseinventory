@@ -1,0 +1,50 @@
+{% extends "users/base.html" %}
+
+{% block page_navigator %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'projectindex' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:index' %}">User</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Register</li>
+    </ol>
+  </nav>
+{% endblock page_navigator %}
+
+{% block body_block %}
+  <div class="container">
+    <div class="card">
+      <h5 class="card-header">Register Here!</h5>
+      <div class="card-body">
+
+        {% if returnSuccessMessage %}
+          <h5 class="card-title">{{ returnSuccessMessage }}</h5>
+        {% else %}
+          {% if user_form %}
+            <h5 class="card-title">Kindly fill out below user registration form:-</h5>
+
+            {% if returnErrorMessage %}
+              <div class="text-danger">
+                <ul>
+                {% for msg in returnErrorMessage %}
+                    <li>{{msg.errMessage}}</li>
+                {% endfor returnErrorMessage %}
+                </ul>
+              </div>
+            {% endif %}
+
+            <form method="POST">
+              {% csrf_token %}
+              <p class="card-text">
+                {% comment %} {{ form.as_p }} {% endcomment %}
+                {% include "form_snippet.html" with form=user_form %}
+                {% include "form_snippet.html" with form=profile_form %}
+              </p>
+              <input type="submit" name="Register" value="Register"  class="btn btn-primary col-auto">
+            </form>
+          {% endif %}
+        {% endif %}
+      
+      </div>
+    </div>
+  </div>
+{% endblock body_block %}

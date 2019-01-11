@@ -1,0 +1,49 @@
+{% extends "mssql/mssql_base.html" %}
+
+{% block block_navigation %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:index' %}">MSSQL</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Server</li>
+    </ol>
+  </nav>
+{% endblock block_navigation %}
+
+{% block block_body %}
+<div class="container-fluid">
+  {% if serverData %}
+    <div class="table-responsive">
+      <!-- <table id="tivotabledata" class="table table-bordered table-hover table-sm tivotabledata">  -->
+      <table id="tivotabledata" class="">      
+        {% for object in serverData %}
+          {% if forloop.first %}
+            <thead>
+              <tr class="table-warning">
+                {% for fieldname in object.keys %}<th scope="col">{{ fieldname }}</th>{% endfor %}            
+              </tr>
+            </thead>
+            <tbody class="table-hover">
+          {% endif %}
+          
+            <tr>
+              {% for value in object.values %}<td>{{ value }}</td>{% endfor %}
+            </tr>
+
+          {% if forloop.last %}
+            </tbody>
+            <tfoot>
+              <tr>
+                {% for fieldname in object.keys %}<th scope="col">{{ fieldname }}</th>{% endfor %}            
+              </tr>
+            </tfoot>
+          {% endif %}
+        {% endfor %}
+      </table>
+    </div>
+  {% else %}
+    <p> No data to display</p>
+  {% endif %}
+</div>
+
+{% endblock block_body %}
