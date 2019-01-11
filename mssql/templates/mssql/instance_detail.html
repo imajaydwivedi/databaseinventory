@@ -1,0 +1,79 @@
+{% extends "mssql/mssql_base.html" %}
+{% load staticfiles %}
+
+{% block block_navigation %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:index' %}">MSSQL</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:instance' %}">Instance</a></li>
+      <li class="breadcrumb-item active" aria-current="page">SqlInstance Details</li>
+    </ol>
+  </nav>
+{% endblock block_navigation %}
+
+{% block block_body %}
+  <div class="container">
+    <div class="card">
+      <h5 class="card-header bg-success">Welcome to SqlInstance Detail Page</h5>
+      <div class="card-body">
+        <h5 class="card-title text-primary">SqlInstance details:</h5>
+        <p class="card-text">
+          <table class="table table-bordered table-striped dbinventorytable-detail">
+            <tbody>
+              <tr class="bg-transpart"><td>InstanceID</td><td>{{instance_detail.instanceid}}</td></tr>
+              <tr class="bg-light"><td>ServerID</td><td>{{instance_detail.serverid}}</td></tr>
+              <tr class="bg-transpart"><td>SqlInstance</td><td>{{instance_detail.sqlinstance}}</td></tr>
+              <tr class="bg-light"><td>InstanceName</td><td>{{instance_detail.instancename}}</td></tr>
+              <tr class="bg-transpart"><td>RootDirectory</td><td>{{instance_detail.rootdirectory}}</td></tr>
+              <tr class="bg-light"><td>Version</td><td>{{instance_detail.version}}</td></tr>
+              <tr class="bg-transpart"><td>CommonVersion</td><td>{{instance_detail.commonversion}}</td></tr>
+              <tr class="bg-light"><td>Build</td><td>{{instance_detail.build}}</td></tr>
+              <tr class="bg-transpart"><td>VersionString</td><td>{{instance_detail.versionstring}}</td></tr>
+              <tr class="bg-light"><td>Edition</td><td>{{instance_detail.edition}}</td></tr>
+              <tr class="bg-transpart"><td>Collation</td><td>{{instance_detail.collation}}</td></tr>
+              <tr class="bg-light"><td>ProductKey</td><td>{{instance_detail.productkey}}</td></tr>
+              <tr class="bg-transpart"><td>DefaultDataLocation</td><td>{{instance_detail.defaultdatalocation}}</td></tr>
+              <tr class="bg-light"><td>DefaultLogLocation</td><td>{{instance_detail.defaultloglocation}}</td></tr>
+              <tr class="bg-transpart"><td>DefaultBackupLocation</td><td>{{instance_detail.defaultbackuplocation}}</td></tr>
+              <tr class="bg-light"><td>ErrorLogPath</td><td>{{instance_detail.errorlogpath}}</td></tr>
+              <tr class="bg-transpart"><td>ServiceAccount</td><td>{{instance_detail.serviceaccount}}</td></tr>
+              <tr class="bg-light"><td>Port</td><td>{{instance_detail.port}}</td></tr>
+              <tr class="bg-transpart"><td>IsStandaloneInstance</td><td>{{instance_detail.isstandaloneinstance}}</td></tr>
+              <tr class="bg-light"><td>IsSQLCluster</td><td>{{instance_detail.issqlcluster}}</td></tr>
+              <tr class="bg-transpart"><td>IsAGListener</td><td>{{instance_detail.isaglistener}}</td></tr>
+              <tr class="bg-light"><td>IsAGNode</td><td>{{instance_detail.isagnode}}</td></tr>
+              <tr class="bg-transpart"><td>AGListener</td><td>{{instance_detail.aglistener}}</td></tr>
+              <tr class="bg-light"><td>HasOtherHASetup</td><td>{{instance_detail.hasotherhasetup}}</td></tr>
+              <tr class="bg-transpart"><td>HARole</td><td>{{instance_detail.harole}}</td></tr>
+              <tr class="bg-light"><td>HAPartner</td><td>{{instance_detail.hapartner}}</td></tr>
+              <tr class="bg-transpart"><td>IsPowershellLinked</td><td>{{instance_detail.ispowershelllinked}}</td></tr>
+              <tr class="bg-light"><td>IsDecom</td><td>{{instance_detail.isdecom}}</td></tr>
+              <tr class="bg-transpart"><td>DecomDate</td><td>{{instance_detail.decomdate}}</td></tr>
+              <tr class="bg-light"><td>CollectionDate</td><td>{{instance_detail.collectiondate}}</td></tr>
+              <tr class="bg-transpart"><td>CollectedBy</td><td>{{instance_detail.collectedby}}</td></tr>
+              <tr class="bg-light"><td>UpdatedDate</td><td>{{instance_detail.updateddate}}</td></tr>
+              <tr class="bg-transpart"><td>UpdatedBy</td><td>{{instance_detail.updatedby}}</td></tr>
+              <tr class="bg-light"><td>Remark1</td><td>{{instance_detail.remark1}}</td></tr>
+              <tr class="bg-transpart"><td>Remark2</td><td>{{instance_detail.remark2}}</td></tr>
+            </tbody>
+          </table>
+          <!--
+          <h6>SqlInstances:</h6>
+          <ul>
+          {% for instance in server_detail.sqlinstances.all %}
+            <li><a href="#">{{instance.sqlinstance}}</a></li>
+          {% endfor %}
+          <ul>
+          -->
+          <p>
+          <div class="container">
+            <a href="{% url 'mssql:instanceupdate' pk=instance_detail.pk %}" class="btn btn-warning">Update</a>
+            <a href="{% url 'mssql:instancedelete' pk=instance_detail.pk %}" class="btn btn-danger">Delete</a>
+          </div>
+          </p>
+        </p>
+      </div>
+    </div>
+  </div>
+{% endblock block_body %}

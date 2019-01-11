@@ -1,5 +1,5 @@
-from mssql.models import Server
-servers_dict = Server.objects.all().values()
+from mssql.models import Server,Instance
+servers_dict = Instance.objects.all().values()
 server_keys = servers_dict[0].keys()
 
 columns = ''

@@ -1,0 +1,145 @@
+{% extends "mssql/mssql_base.html" %}
+{% load staticfiles %}
+
+{% block block_navigation %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:index' %}">MSSQL</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Instance</li>
+    </ol>
+  </nav>
+{% endblock block_navigation %}
+
+{% block block_body %}
+<div class="container-fluid">
+  {% if instances %}
+    <div class="table-responsive">
+      <table id="dbinventorytable" class="dbinventorytable-list">  
+        <thead>
+          <tr class="table-primary">
+            <th scope="col">InstanceID</th>
+            <th scope="col">ServerID</th>
+            <th scope="col">SqlInstance</th>
+            <th scope="col">InstanceName</th>
+            <th scope="col">RootDirectory</th>
+            <th scope="col">Version</th>
+            <th scope="col">CommonVersion</th>
+            <th scope="col">Build</th>
+            <th scope="col">VersionString</th>
+            <th scope="col">Edition</th>
+            <th scope="col">Collation</th>
+            <th scope="col">ProductKey</th>
+            <th scope="col">DefaultDataLocation</th>
+            <th scope="col">DefaultLogLocation</th>
+            <th scope="col">DefaultBackupLocation</th>
+            <th scope="col">ErrorLogPath</th>
+            <th scope="col">ServiceAccount</th>
+            <th scope="col">Port</th>
+            <th scope="col">IsStandaloneInstance</th>
+            <th scope="col">IsSQLCluster</th>
+            <th scope="col">IsAGListener</th>
+            <th scope="col">IsAGNode</th>
+            <th scope="col">AGListener</th>
+            <th scope="col">HasOtherHASetup</th>
+            <th scope="col">HARole</th>
+            <th scope="col">HAPartner</th>
+            <th scope="col">IsPowershellLinked</th>
+            <th scope="col">IsDecom</th>
+            <th scope="col">DecomDate</th>
+            <th scope="col">CollectionDate</th>
+            <th scope="col">CollectedBy</th>
+            <th scope="col">UpdatedDate</th>
+            <th scope="col">UpdatedBy</th>
+            <th scope="col">Remark1</th>
+            <th scope="col">Remark2</th>
+          </tr>
+        </thead>
+        <tbody class="table-hover">
+        {% for instance in instances %}
+          <tr>
+            <td><a href="{{instance.instanceid}}">{{instance.instanceid}}</a></td>
+            <td><a href="{% url 'mssql:serverdetail' instance.serverid.pk %}">{{instance.serverid}}</a></td>
+            <td><a href="{{instance.instanceid}}">{{instance.sqlinstance}}</a></td>
+            <td><a href="{{instance.instanceid}}">{{instance.instancename}}</a></td>
+            <td>{{instance.rootdirectory}}</td>
+            <td>{{instance.version}}</td>
+            <td>{{instance.commonversion}}</td>
+            <td>{{instance.build}}</td>
+            <td>{{instance.versionstring}}</td>
+            <td>{{instance.edition}}</td>
+            <td>{{instance.collation}}</td>
+            <td>{{instance.productkey}}</td>
+            <td>{{instance.defaultdatalocation}}</td>
+            <td>{{instance.defaultloglocation}}</td>
+            <td>{{instance.defaultbackuplocation}}</td>
+            <td>{{instance.errorlogpath}}</td>
+            <td>{{instance.serviceaccount}}</td>
+            <td>{{instance.port}}</td>
+            <td>{{instance.isstandaloneinstance}}</td>
+            <td>{{instance.issqlcluster}}</td>
+            <td>{{instance.isaglistener}}</td>
+            <td>{{instance.isagnode}}</td>
+            <td>{% if instance.aglistener %}<a href="{{instance.aglistener.pk}}">{{instance.aglistener}} {% else %} {{instance.aglistener}} {% endif %}</td>
+            <td>{{instance.hasotherhasetup}}</td>
+            <td>{{instance.harole}}</td>
+            <td>{{instance.hapartner}}</td>
+            <td>{{instance.ispowershelllinked}}</td>
+            <td>{{instance.isdecom}}</td>
+            <td>{{instance.decomdate}}</td>
+            <td>{{instance.collectiondate}}</td>
+            <td>{{instance.collectedby}}</td>
+            <td>{{instance.updateddate}}</td>
+            <td>{{instance.updatedby}}</td>
+            <td>{{instance.remark1}}</td>
+            <td>{{instance.remark2}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr class="table-primary">
+            <th scope="col">InstanceID</th>
+            <th scope="col">ServerID</th>
+            <th scope="col">SqlInstance</th>
+            <th scope="col">InstanceName</th>
+            <th scope="col">RootDirectory</th>
+            <th scope="col">Version</th>
+            <th scope="col">CommonVersion</th>
+            <th scope="col">Build</th>
+            <th scope="col">VersionString</th>
+            <th scope="col">Edition</th>
+            <th scope="col">Collation</th>
+            <th scope="col">ProductKey</th>
+            <th scope="col">DefaultDataLocation</th>
+            <th scope="col">DefaultLogLocation</th>
+            <th scope="col">DefaultBackupLocation</th>
+            <th scope="col">ErrorLogPath</th>
+            <th scope="col">ServiceAccount</th>
+            <th scope="col">Port</th>
+            <th scope="col">IsStandaloneInstance</th>
+            <th scope="col">IsSQLCluster</th>
+            <th scope="col">IsAGListener</th>
+            <th scope="col">IsAGNode</th>
+            <th scope="col">AGListener</th>
+            <th scope="col">HasOtherHASetup</th>
+            <th scope="col">HARole</th>
+            <th scope="col">HAPartner</th>
+            <th scope="col">IsPowershellLinked</th>
+            <th scope="col">IsDecom</th>
+            <th scope="col">DecomDate</th>
+            <th scope="col">CollectionDate</th>
+            <th scope="col">CollectedBy</th>
+            <th scope="col">UpdatedDate</th>
+            <th scope="col">UpdatedBy</th>
+            <th scope="col">Remark1</th>
+            <th scope="col">Remark2</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  {% else %}
+    <p> No data to display</p>
+  {% endif %}
+</div>
+
+{% endblock block_body %}

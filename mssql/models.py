@@ -8,6 +8,8 @@ databaseinventory = ['Application', 'Server', 'Instance']
 # Service Requests = []
 
 # Create your models here.
+
+
 class Application(models.Model):
     # Field name made lowercase.
     applicationid = models.AutoField(
@@ -48,7 +50,7 @@ class Application(models.Model):
                            ('applicationname', 'businessunit', 'product'),)
 
     def __str__(self):
-      return "{0} ({1})".format(self.applicationname,self.applicationid)
+        return "{0} ({1})".format(self.applicationname, self.applicationid)
 
 
 class Server(models.Model):
@@ -103,7 +105,7 @@ class Server(models.Model):
     isag = models.BooleanField(db_column='IsAG', blank=True, null=True)
     # Field name made lowercase.
     parentserverid = models.ForeignKey(
-        'self', models.DO_NOTHING, db_column='ParentServerId', blank=True, null=True, related_name = 'sqlnetworknames')
+        'self', models.DO_NOTHING, db_column='ParentServerId', blank=True, null=True, related_name='sqlnetworknames')
     # Field name made lowercase.
     os = models.CharField(db_column='OS', max_length=125,
                           blank=True, null=True)
@@ -157,7 +159,6 @@ class Server(models.Model):
 
     def get_absolute_url(self):
         return reverse("mssql:serverdetail", kwargs={"pk": self.pk})
-    
 
     class Meta:
         managed = False
@@ -223,7 +224,7 @@ class Instance(models.Model):
     isaglistener = models.BooleanField(db_column='IsAGListener')
     # Field name made lowercase.
     isagnode = models.BooleanField(db_column='IsAGNode')
-    aglistenername = models.ForeignKey('self', models.DO_NOTHING, db_column='AGListenerName',
+    aglistener = models.ForeignKey('self', models.DO_NOTHING, db_column='AGListener',
                                        blank=True, null=True, related_name='aglisteners')  # Field name made lowercase.
     # Field name made lowercase.
     hasotherhasetup = models.BooleanField(db_column='HasOtherHASetup')
@@ -236,12 +237,14 @@ class Instance(models.Model):
     ispowershelllinked = models.BooleanField(
         db_column='IsPowershellLinked', blank=True, null=True)
     # Field name made lowercase.
-    isdecom = models.BooleanField(db_column='IsDecom')
+    isdecom = models.BooleanField(
+        db_column='IsDecom', default=False, blank=True, null=True)
     # Field name made lowercase.
     decomdate = models.DateTimeField(
         db_column='DecomDate', blank=True, null=True)
     # Field name made lowercase.
-    collectiondate = models.DateTimeField(db_column='CollectionDate')
+    collectiondate = models.DateTimeField(
+        db_column='CollectionDate', blank=True, null=True)
     # Field name made lowercase.
     collectedby = models.CharField(db_column='CollectedBy', max_length=50)
     # Field name made lowercase.
@@ -259,6 +262,10 @@ class Instance(models.Model):
         managed = False
         db_table = 'Instance'
 
-    
     def __str__(self):
         return "{0}  ({1})".format(self.instanceid, self.sqlinstance)
+
+    def get_absolute_url(self):
+        return reverse("mssql:instancedetail", kwargs={"pk": self.pk})
+
+    

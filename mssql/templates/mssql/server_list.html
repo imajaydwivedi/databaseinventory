@@ -59,7 +59,7 @@
             <td><a href="{{server.serverid}}">{{server.servername}}</a></td>
             <td> 
               {% if server.applicationid %}
-              <a href="{{server.applicationid}}">{{server.applicationid}}</a>
+              <a href="{% url 'mssql:applicationdetail' server.applicationid.pk %}">{{server.applicationid}}</a>
               {% else %}
                 {{server.applicationid}}
               {% endif %}

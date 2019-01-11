@@ -59,7 +59,7 @@ SELECT	i.[InstanceID]
       ,i.[IsSQLCluster]
       ,i.[IsAGListener]
       ,i.[IsAGNode]
-      ,i.[AGListenerName]
+      ,i.[AGListener]
       ,i.[HasOtherHASetup]
       ,i.[HARole]
       ,i.[HAPartner]
@@ -91,7 +91,11 @@ INNER JOIN
 class ServerListView(ListView):
     context_object_name = 'servers'
     model = models.Server
-    # template_name = 'mssql/server_list.html'
+
+
+class InstanceListView(ListView):
+    context_object_name = 'instances'
+    model = models.Instance
 
 
 class ServerDetailView(DetailView):
@@ -101,9 +105,21 @@ class ServerDetailView(DetailView):
     template_name = 'mssql/server_detail.html'
 
 
+class InstanceDetailView(DetailView):
+    context_object_name = 'instance_detail'
+    model = models.Instance
+    
+    template_name = 'mssql/instance_detail.html'
+
+
 class ServerCreateView(CreateView):
     model = models.Server
     fields = ['servername','applicationid','environmenttype','fqdn','ipaddress','domain','isstandaloneserver','issqlclusternode','isagnode','iswsfc','issqlcluster','isag','parentserverid','os','spversion','isvm','isphysical','manufacturer','model','ram','cpu','powerplan','osarchitecture','generaldescription']
+
+
+class InstanceCreateView(CreateView):
+    model = models.Instance
+    fields = ['serverid','sqlinstance','instancename','rootdirectory','version','commonversion','build','versionstring','edition','collation','productkey','defaultdatalocation','defaultloglocation','defaultbackuplocation','errorlogpath','serviceaccount','port','isstandaloneinstance','issqlcluster','isaglistener','isagnode','aglistener','hasotherhasetup','harole','hapartner','ispowershelllinked','remark1','remark2']
 
 
 class ServerUpdateView(UpdateView):
@@ -111,6 +127,16 @@ class ServerUpdateView(UpdateView):
     fields = ['servername','applicationid','environmenttype','fqdn','ipaddress','domain','isstandaloneserver','issqlclusternode','isagnode','iswsfc','issqlcluster','isag','parentserverid','os','spversion','isvm','isphysical','manufacturer','model','ram','cpu','powerplan','osarchitecture','isdecom','decomdate','generaldescription']
 
 
+class InstanceUpdateView(UpdateView):
+    model = models.Instance
+    fields = ['serverid','sqlinstance','instancename','rootdirectory','version','commonversion','build','versionstring','edition','collation','productkey','defaultdatalocation','defaultloglocation','defaultbackuplocation','errorlogpath','serviceaccount','port','isstandaloneinstance','issqlcluster','isaglistener','isagnode','aglistener','hasotherhasetup','harole','hapartner','ispowershelllinked','isdecom','decomdate','remark1','remark2']
+
+
 class ServerDeleteView(DeleteView):
     model = models.Server
     success_url = reverse_lazy("mssql:server")
+
+
+class InstanceDeleteView(DeleteView):
+    model = models.Instance
+    success_url = reverse_lazy("mssql:instance")

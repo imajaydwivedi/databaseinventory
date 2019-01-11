@@ -16,5 +16,10 @@ urlpatterns = [
     path('server/create/', views.ServerCreateView.as_view(), name='servercreate'),
     path('server/update/<int:pk>/', views.ServerUpdateView.as_view(), name='serverupdate'),
     path('server/delete/<int:pk>/', views.ServerDeleteView .as_view(), name='serverdelete'),
-    path('instance/', views.instance, name='instance'),
+    # path('instance/', views.instance, name='instance'),
+    path('instance/', views.InstanceListView.as_view(), name='instance'),
+    path('instance/<int:pk>/', views.InstanceDetailView.as_view(),name='instancedetail'),
+    path('instance/create/', views.InstanceCreateView.as_view(), name='instancecreate'),
+    path('instance/update/<int:pk>/', views.InstanceUpdateView.as_view(), name='instanceupdate'),
+    path('instance/delete/<int:pk>/', views.InstanceDeleteView .as_view(), name='instancedelete'),
 ]

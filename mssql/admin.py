@@ -23,7 +23,7 @@ class ServerAdmin(admin.ModelAdmin):
 @admin.register(Instance)
 class InstanceAdmin(admin.ModelAdmin):
     # pass
-    list_display = ['instanceid','serverid_id','sqlinstance','instancename','rootdirectory','version','commonversion','build','versionstring','edition','collation','productkey','defaultdatalocation','defaultloglocation','defaultbackuplocation','errorlogpath','serviceaccount','port','isstandaloneinstance','issqlcluster','isaglistener','isagnode','aglistenername_id','hasotherhasetup','harole','hapartner_id','ispowershelllinked','isdecom','decomdate','collectiondate','collectedby','updateddate','updatedby','remark1','remark2']
+    list_display = ['instanceid','serverid_id','sqlinstance','instancename','rootdirectory','version','commonversion','build','versionstring','edition','collation','productkey','defaultdatalocation','defaultloglocation','defaultbackuplocation','errorlogpath','serviceaccount','port','isstandaloneinstance','issqlcluster','isaglistener','isagnode','aglistener','hasotherhasetup','harole','hapartner','ispowershelllinked','isdecom','decomdate','collectiondate','collectedby','updateddate','updatedby','remark1','remark2']
 
     list_filter = ['isdecom','versionstring', 'edition', 'harole']
 
