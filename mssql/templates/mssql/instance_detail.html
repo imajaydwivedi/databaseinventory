@@ -22,7 +22,7 @@
           <table class="table table-bordered table-striped dbinventorytable-detail">
             <tbody>
               <tr class="bg-transpart"><td>InstanceID</td><td>{{instance_detail.instanceid}}</td></tr>
-              <tr class="bg-light"><td>ServerID</td><td>{{instance_detail.serverid}}</td></tr>
+              <tr class="bg-light"><td>ServerID</td><td><a href="{% url 'mssql:serverdetail' instance_detail.serverid.pk %}">{{instance_detail.serverid}}</a></td></tr>
               <tr class="bg-transpart"><td>SqlInstance</td><td>{{instance_detail.sqlinstance}}</td></tr>
               <tr class="bg-light"><td>InstanceName</td><td>{{instance_detail.instancename}}</td></tr>
               <tr class="bg-transpart"><td>RootDirectory</td><td>{{instance_detail.rootdirectory}}</td></tr>

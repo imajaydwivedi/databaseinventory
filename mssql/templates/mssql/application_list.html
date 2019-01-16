@@ -1,0 +1,83 @@
+{% extends "mssql/mssql_base.html" %}
+{% load staticfiles %}
+
+{% block block_navigation %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:index' %}">MSSQL</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Application</li>
+    </ol>
+  </nav>
+{% endblock block_navigation %}
+
+{% block block_body %}
+<div class="container-fluid">
+  {% if applications %}
+    <div class="table-responsive">
+      <!-- <table id="tivotabledata" class="table table-bordered table-hover table-sm tivotabledata">  -->
+      <table id="dbinventorytable" class="dbinventorytable-list">  
+        <thead>
+          <tr class="table-primary">
+            <th scope="col">ApplicationID</th>
+            <th scope="col">Category</th>
+            <th scope="col">BusinessUnit</th>
+            <th scope="col">ApplicationName</th>
+            <th scope="col">Priority</th>
+            <th scope="col">BusinessOwner</th>
+            <th scope="col">TechnicalOwner</th>
+            <th scope="col">SecondaryTechnicalOwner</th>
+            <th scope="col">Remark1</th>
+            <th scope="col">Remark2</th>
+            <th scope="col">CollectionDate</th>
+            <th scope="col">CollectedBy</th>
+            <th scope="col">UpdatedDate</th>
+            <th scope="col">UpdatedBy</th>
+          </tr>
+        </thead>
+        <tbody class="table-hover">
+        {% for application in applications %}
+          <tr>
+            <td><a href="{{application.applicationid}}">{{application.applicationid}}</a></td>
+            <td><a href="{{application.applicationid}}">{{application.category}}</a></td>
+            <td><a href="{{application.applicationid}}">{{application.businessunit}}</a></td>
+            <td><a href="{{application.applicationid}}">{{application.applicationname}}</a></td>
+            <td>{{application.priority}}</td>
+            <td>{{application.businessowner}}</td>
+            <td>{{application.technicalowner}}</td>
+            <td>{{application.secondarytechnicalowner}}</td>
+            <td>{{application.remark1}}</td>
+            <td>{{application.remark2}}</td>
+            <td>{{application.collectiondate}}</td>
+            <td>{{application.collectedby}}</td>
+            <td>{{application.updateddate}}</td>
+            <td>{{application.updatedby}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr class="table-primary">
+            <th scope="col">ApplicationID</th>
+            <th scope="col">Category</th>
+            <th scope="col">BusinessUnit</th>
+            <th scope="col">ApplicationName</th>
+            <th scope="col">Priority</th>
+            <th scope="col">BusinessOwner</th>
+            <th scope="col">TechnicalOwner</th>
+            <th scope="col">SecondaryTechnicalOwner</th>
+            <th scope="col">Remark1</th>
+            <th scope="col">Remark2</th>
+            <th scope="col">CollectionDate</th>
+            <th scope="col">CollectedBy</th>
+            <th scope="col">UpdatedDate</th>
+            <th scope="col">UpdatedBy</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  {% else %}
+    <p> No data to display</p>
+  {% endif %}
+</div>
+
+{% endblock block_body %}

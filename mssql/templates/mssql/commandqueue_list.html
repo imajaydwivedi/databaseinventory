@@ -1,0 +1,71 @@
+{% extends "mssql/mssql_base.html" %}
+{% load staticfiles %}
+
+{% block block_navigation %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:index' %}">MSSQL</a></li>
+      <li class="breadcrumb-item active" aria-current="page">CommandQueue</li>
+    </ol>
+  </nav>
+{% endblock block_navigation %}
+
+{% block block_body %}
+<div class="container-fluid">
+  {% if commandqueues %}
+    <div class="table-responsive">
+      <!-- <table id="tivotabledata" class="table table-bordered table-hover table-sm tivotabledata">  -->
+      <table id="dbinventorytable" class="dbinventorytable-list">  
+        <thead>
+          <tr class="table-primary">
+            <th scope="col">ID</th>
+            <th scope="col">GUID</th>
+            <th scope="col">InstanceId</th>
+            <th scope="col">DatabaseId</th>
+            <th scope="col">Command</th>
+            <th scope="col">jobId</th>
+            <th scope="col">JobType</th>
+            <th scope="col">Status</th>
+            <th scope="col">reason</th>
+            <th scope="col">priority</th>
+          </tr>
+        </thead>
+        <tbody class="table-hover">
+        {% for commandqueue in commandqueues %}
+          <tr>
+            <td><a href="{{ commandqueue.id }}">{{commandqueue.id}}</a></td>
+            <td><a href="{{ commandqueue.id }}">{{commandqueue.guid}}</a></td>
+            <td><a href="{% url 'mssql:instancedetail' commandqueue.instanceid.pk %}">{{commandqueue.instanceid}}</a></td>
+            <td><a href="{% url 'mssql:databasedetail' commandqueue.databaseid.pk %}">{{commandqueue.databaseid}}</td>
+            <td>{{commandqueue.command}}</td>
+            <td>{{commandqueue.jobid}}</td>
+            <td>{{commandqueue.jobtype}}</td>
+            <td>{{commandqueue.status}}</td>
+            <td>{{commandqueue.reason}}</td>
+            <td>{{commandqueue.priority}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr class="table-primary">
+            <th scope="col">ID</th>
+            <th scope="col">GUID</th>
+            <th scope="col">InstanceId</th>
+            <th scope="col">DatabaseId</th>
+            <th scope="col">Command</th>
+            <th scope="col">jobId</th>
+            <th scope="col">JobType</th>
+            <th scope="col">Status</th>
+            <th scope="col">reason</th>
+            <th scope="col">priority</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  {% else %}
+    <p> No data to display</p>
+  {% endif %}
+</div>
+
+{% endblock block_body %}

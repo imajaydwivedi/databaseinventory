@@ -1,0 +1,44 @@
+{% extends "mssql/mssql_base.html" %}
+{% load staticfiles %}
+
+{% block block_navigation %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:index' %}">MSSQL</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:backuphistory' %}">BackupHistory</a></li>
+      <li class="breadcrumb-item active" aria-current="page">BackupHistory Details</li>
+    </ol>
+  </nav>
+{% endblock block_navigation %}
+
+{% block block_body %}
+  <div class="container">
+    <div class="card">
+      <h5 class="card-header bg-success">Welcome to BackupHistory Detail Page</h5>
+      <div class="card-body">
+        <h5 class="card-title text-primary">BackupHistory details:</h5>
+        <p class="card-text">
+          <table class="table table-bordered table-striped dbinventorytable-detail">
+            <tbody>
+              <tr class="bg-transpart"><td>BackupHistId</td><td>{{backuphistory_detail.backuphistid}}</td></tr>
+              <tr class="bg-light"><td>InstanceId</td><td><a href="{% url 'mssql:instancedetail' backuphistory_detail.instanceid.pk %}">{{backuphistory_detail.instanceid}}</a></td></tr>
+              <tr class="bg-transpart"><td>DatabaseId</td><td><a href="{% url 'mssql:databasedetail' backuphistory_detail.databaseid.pk %}">{{backuphistory_detail.databaseid}}</a></td></tr>
+              <tr class="bg-light"><td>FullbackupDate</td><td>{{backuphistory_detail.fullbackupdate}}</td></tr>
+              <tr class="bg-transpart"><td>DiffBackupDate</td><td>{{backuphistory_detail.diffbackupdate}}</td></tr>
+              <tr class="bg-light"><td>TranBackupDate</td><td>{{backuphistory_detail.tranbackupdate}}</td></tr>
+              <tr class="bg-transpart"><td>FullBackupSize</td><td>{{backuphistory_detail.fullbackupsize}}</td></tr>
+              <tr class="bg-light"><td>DiffBackupSize</td><td>{{backuphistory_detail.diffbackupsize}}</td></tr>
+              <tr class="bg-transpart"><td>TranBackupSize</td><td>{{backuphistory_detail.tranbackupsize}}</td></tr>
+              <tr class="bg-light"><td>FullBackupDuration</td><td>{{backuphistory_detail.fullbackupduration}}</td></tr>
+              <tr class="bg-transpart"><td>DiffBackupDuration</td><td>{{backuphistory_detail.diffbackupduration}}</td></tr>
+              <tr class="bg-light"><td>TranBackupDuration</td><td>{{backuphistory_detail.tranbackupduration}}</td></tr>
+              <tr class="bg-transpart"><td>Compressed</td><td>{{backuphistory_detail.compressed}}</td></tr>
+            </tbody>
+          </table>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+{% endblock block_body %}

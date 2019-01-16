@@ -1,0 +1,49 @@
+{% extends "mssql/mssql_base.html" %}
+{% load staticfiles %}
+
+{% block block_navigation %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:index' %}">MSSQL</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:backupschedule' %}">BackupSchedule</a></li>
+      <li class="breadcrumb-item active" aria-current="page">BackupSchedule Details</li>
+    </ol>
+  </nav>
+{% endblock block_navigation %}
+
+{% block block_body %}
+  <div class="container">
+    <div class="card">
+      <h5 class="card-header bg-success">Welcome to BackupSchedule Detail Page</h5>
+      <div class="card-body">
+        <h5 class="card-title text-primary">BackupSchedule details:</h5>
+        <p class="card-text">
+          <table class="table table-bordered table-striped dbinventorytable-detail">
+            <tbody>
+              <tr class="bg-transpart"><td>BkuSchedId</td><td>{{backupschedule_detail.bkuschedid}}</td></tr>
+              <tr class="bg-light"><td>InstanceId</td><td>{{backupschedule_detail.instanceid}}</td></tr>
+              <tr class="bg-transpart"><td>TimeFrom</td><td>{{backupschedule_detail.timefrom}}</td></tr>
+              <tr class="bg-light"><td>TimeTo</td><td>{{backupschedule_detail.timeto}}</td></tr>
+            </tbody>
+          </table>
+
+          <!--
+          <h6>SqlInstances:</h6>
+          <ul>
+          {% for instance in server_detail.sqlinstances.all %}
+            <li><a href="#">{{instance.sqlinstance}}</a></li>
+          {% endfor %}
+          <ul>
+          -->
+          <p>
+          <div class="container">
+            <a href="{% url 'mssql:backupscheduleupdate' pk=backupschedule_detail.pk %}" class="btn btn-warning">Update</a>
+            <a href="{% url 'mssql:backupscheduledelete' pk=backupschedule_detail.pk %}" class="btn btn-danger">Delete</a>
+          </div>
+          </p>
+        </p>
+      </div>
+    </div>
+  </div>
+{% endblock block_body %}

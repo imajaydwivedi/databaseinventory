@@ -29,7 +29,8 @@ SECRET_KEY = '(w+lknv&c^=6d%8oo#b1f4_&hcd9evi^)^)101qgcjf3kk2v+@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['imajaydwivedi.pythonanywhere.com',
+                 'localhost', 'sqldbatools', 'tul1dbapmtdb1', ]
 
 
 # Application definition
@@ -61,7 +62,7 @@ ROOT_URLCONF = 'databaseinventory.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR,],
+        'DIRS': [TEMPLATE_DIR, ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,6 +80,7 @@ WSGI_APPLICATION = 'databaseinventory.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
+'''
 DATABASES = {
     'default': {
         'NAME': databaseName,
@@ -99,7 +101,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-'''
 
 
 # Password validation
@@ -131,7 +132,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -154,7 +154,6 @@ STATICFILES_DIRS = [
     STATIC_DIR,
 ]
 
-
 # MEDIA
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
@@ -164,8 +163,8 @@ LOGIN_URL = '/users/user_login'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Mail Settings
-EMAIL_USE_TLS = True
+#EMAIL_USE_TLS = True
 EMAIL_HOST = SmtpHost
 EMAIL_PORT = SmtpPort
 EMAIL_HOST_USER = EmailUser
-EMAIL_HOST_PASSWORD = EmailPassword
+#EMAIL_HOST_PASSWORD = EmailPassword

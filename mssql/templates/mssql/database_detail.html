@@ -1,0 +1,53 @@
+{% extends "mssql/mssql_base.html" %}
+{% load staticfiles %}
+
+{% block block_navigation %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:index' %}">MSSQL</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:database' %}">Database</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Database Details</li>
+    </ol>
+  </nav>
+{% endblock block_navigation %}
+
+{% block block_body %}
+  <div class="container">
+    <div class="card">
+      <h5 class="card-header bg-success">Welcome to Database Detail Page</h5>
+      <div class="card-body">
+        <h5 class="card-title text-primary">Database details:</h5>
+        <p class="card-text">
+          <table class="table table-bordered table-striped dbinventorytable-detail">
+            <tbody>
+              <tr class="bg-transpart"><td>DatabaseId</td><td>{{database_detail.databaseid}}</td></tr>
+              <tr class="bg-light"><td>InstanceId</td><td><a href="{% url 'mssql:instancedetail' database_detail.instanceid.pk %}">{{database_detail.instanceid}}</a></td></tr>
+              <tr class="bg-transpart"><td>DatabaseName</td><td>{{database_detail.databasename}}</td></tr>
+              <tr class="bg-light"><td>CreatedDate</td><td>{{database_detail.createddate}}</td></tr>
+              <tr class="bg-transpart"><td>RecoveryModel</td><td>{{database_detail.recoverymodel}}</td></tr>
+              <tr class="bg-light"><td>CurrentDBSize</td><td>{{database_detail.currentdbsize}}</td></tr>
+              <tr class="bg-transpart"><td>BackupPath</td><td>{{database_detail.backuppath}}</td></tr>
+            </tbody>
+          </table>
+
+          <!--
+          <h6>SqlInstances:</h6>
+          <ul>
+          {% for instance in server_detail.sqlinstances.all %}
+            <li><a href="#">{{instance.sqlinstance}}</a></li>
+          {% endfor %}
+          <ul>
+          -->
+          
+          <p>
+          <div class="container">
+            <a href="{% url 'mssql:databaseupdate' pk=database_detail.pk %}" class="btn btn-warning">Update</a>
+            <a href="{% url 'mssql:databasedelete' pk=database_detail.pk %}" class="btn btn-danger">Delete</a>
+          </div>
+          </p>
+        </p>
+      </div>
+    </div>
+  </div>
+{% endblock block_body %}

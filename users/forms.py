@@ -13,6 +13,8 @@ class UserForm(forms.ModelForm):
 
 
 class UserProfileInfoForm(forms.ModelForm):
+
+    
     class Meta():
         model = UserProfileInfo
         fields = ('portfolio_site', 'profile_pic')
@@ -40,6 +42,8 @@ class FormName(forms.Form):
     # botcatcher = forms.CharField(required=False, widget=forms.HiddenInput, validators=[
     #                              validators.MaxLengthValidator(0)])
     text = forms.CharField(widget=forms.Textarea)
+
+    
 
     def clean(self):
         all_clean_data = super().clean()

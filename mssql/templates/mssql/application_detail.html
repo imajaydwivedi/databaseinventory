@@ -1,0 +1,58 @@
+{% extends "mssql/mssql_base.html" %}
+{% load staticfiles %}
+
+{% block block_navigation %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:index' %}">MSSQL</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:application' %}">Application</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Application Details</li>
+    </ol>
+  </nav>
+{% endblock block_navigation %}
+
+{% block block_body %}
+  <div class="container">
+    <div class="card">
+      <h5 class="card-header bg-success">Welcome to Application Detail Page</h5>
+      <div class="card-body">
+        <h5 class="card-title text-primary">Application details:</h5>
+        <p class="card-text">
+          <table class="table table-bordered table-striped dbinventorytable-detail">
+            <tbody>
+              <tr class="bg-transpart"><td>ApplicationID</td><td>{{application_detail.applicationid}}</td></tr>
+              <tr class="bg-light"><td>Category</td><td>{{application_detail.category}}</td></tr>
+              <tr class="bg-transpart"><td>BusinessUnit</td><td>{{application_detail.businessunit}}</td></tr>
+              <tr class="bg-light"><td>ApplicationName</td><td>{{application_detail.applicationname}}</td></tr>
+              <tr class="bg-transpart"><td>Priority</td><td>{{application_detail.priority}}</td></tr>
+              <tr class="bg-light"><td>BusinessOwner</td><td>{{application_detail.businessowner}}</td></tr>
+              <tr class="bg-transpart"><td>TechnicalOwner</td><td>{{application_detail.technicalowner}}</td></tr>
+              <tr class="bg-light"><td>SecondaryTechnicalOwner</td><td>{{application_detail.secondarytechnicalowner}}</td></tr>
+              <tr class="bg-transpart"><td>Remark1</td><td>{{application_detail.remark1}}</td></tr>
+              <tr class="bg-light"><td>Remark2</td><td>{{application_detail.remark2}}</td></tr>
+              <tr class="bg-transpart"><td>CollectionDate</td><td>{{application_detail.collectiondate}}</td></tr>
+              <tr class="bg-light"><td>CollectedBy</td><td>{{application_detail.collectedby}}</td></tr>
+              <tr class="bg-transpart"><td>UpdatedDate</td><td>{{application_detail.updateddate}}</td></tr>
+              <tr class="bg-light"><td>UpdatedBy</td><td>{{application_detail.updatedby}}</td></tr>
+            </tbody>
+          </table>
+
+          <h6>Servers:</h6>
+          <ul>
+          {% for server in application_detail.servers.all %}
+            <li><a href="#">{{server.fqdn}}</a></li>
+          {% endfor %}
+          <ul>
+          
+          <p>
+          <div class="container">
+            <a href="{% url 'mssql:applicationupdate' pk=application_detail.pk %}" class="btn btn-warning">Update</a>
+            <a href="{% url 'mssql:applicationdelete' pk=application_detail.pk %}" class="btn btn-danger">Delete</a>
+          </div>
+          </p>
+        </p>
+      </div>
+    </div>
+  </div>
+{% endblock block_body %}

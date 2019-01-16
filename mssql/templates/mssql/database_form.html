@@ -1,0 +1,33 @@
+{% extends "mssql/mssql_base.html" %}
+{% load staticfiles %}
+
+{% block block_navigation %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:index' %}">MSSQL</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:database' %}">Database</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{% if not form.instance.pk %} Create {% else %} Update {% endif %}</li>
+    </ol>
+  </nav>
+{% endblock block_navigation %}
+
+{% block block_body %}
+  <div class="container">
+    <div class="card">
+      <h5 class="card-header">{% if not form.instance.pk %} Create {% else %} Update {% endif %} Database</h5>
+      <div class="card-body">
+        <h5 class="card-title">{% if not form.instance.pk %} Kindly provide details of new Database:- {% else %} Kindly make the required changes:- {% endif %}</h5>
+        
+        <form method="POST">
+          {% csrf_token %}
+          <p class="card-text">
+            {% include "form_snippet.html" with form=form %}
+          </p>
+          <input type="submit" class="btn btn-primary" value="Submit">
+        </form>
+      
+      </div>
+    </div>
+  </div>
+{% endblock block_body %}

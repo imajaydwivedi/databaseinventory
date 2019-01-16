@@ -1,0 +1,47 @@
+{% extends "mssql/mssql_base.html" %}
+{% load staticfiles %}
+
+{% block block_navigation %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:index' %}">MSSQL</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Logging</li>
+    </ol>
+  </nav>
+{% endblock block_navigation %}
+
+{% block block_body %}
+<div class="container-fluid">
+  {% if loggings %}
+    <div class="table-responsive">
+      <!-- <table id="tivotabledata" class="table table-bordered table-hover table-sm tivotabledata">  -->
+      <table id="dbinventorytable" class="dbinventorytable-list">  
+        <thead>
+          <tr class="table-primary">
+            <th scope="col">logId</th>
+            <th scope="col">LogMessage</th>
+          </tr>
+        </thead>
+        <tbody class="table-hover">
+        {% for logging in loggings %}
+          <tr>
+            <td><a href="{{logging.logid}}">{{logging.logid}}</a></td>
+            <td>{{logging.logmessage}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr class="table-primary">
+            <th scope="col">logId</th>
+            <th scope="col">LogMessage</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  {% else %}
+    <p> No data to display</p>
+  {% endif %}
+</div>
+
+{% endblock block_body %}

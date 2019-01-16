@@ -1,0 +1,80 @@
+{% extends "mssql/mssql_base.html" %}
+{% load staticfiles %}
+
+{% block block_navigation %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:index' %}">MSSQL</a></li>
+      <li class="breadcrumb-item active" aria-current="page">BackupHistory</li>
+    </ol>
+  </nav>
+{% endblock block_navigation %}
+
+{% block block_body %}
+<div class="container-fluid">
+  {% if backuphistories %}
+    <div class="table-responsive">
+      <!-- <table id="tivotabledata" class="table table-bordered table-hover table-sm tivotabledata">  -->
+      <table id="dbinventorytable" class="dbinventorytable-list">  
+        <thead>
+          <tr class="table-primary">
+            <th scope="col">BackupHistId</th>
+            <th scope="col">InstanceId</th>
+            <th scope="col">DatabaseId</th>
+            <th scope="col">FullbackupDate</th>
+            <th scope="col">DiffBackupDate</th>
+            <th scope="col">TranBackupDate</th>
+            <th scope="col">FullBackupSize</th>
+            <th scope="col">DiffBackupSize</th>
+            <th scope="col">TranBackupSize</th>
+            <th scope="col">FullBackupDuration</th>
+            <th scope="col">DiffBackupDuration</th>
+            <th scope="col">TranBackupDuration</th>
+            <th scope="col">Compressed</th>
+          </tr>
+        </thead>
+        <tbody class="table-hover">
+        {% for backuphistory in backuphistories %}
+          <tr>
+            <td><a href="{{backuphistory.backuphistid}}">{{backuphistory.backuphistid}}</a></td>
+            <td><a href="{% url 'mssql:instancedetail' backuphistory.instanceid.pk %}">{{backuphistory.instanceid}}</a></td>
+            <td><a href="{% url 'mssql:databasedetail' backuphistory.databaseid.pk %}">{{backuphistory.databaseid}}</a></td>
+            <td>{{backuphistory.fullbackupdate}}</td>
+            <td>{{backuphistory.diffbackupdate}}</td>
+            <td>{{backuphistory.tranbackupdate}}</td>
+            <td>{{backuphistory.fullbackupsize}}</td>
+            <td>{{backuphistory.diffbackupsize}}</td>
+            <td>{{backuphistory.tranbackupsize}}</td>
+            <td>{{backuphistory.fullbackupduration}}</td>
+            <td>{{backuphistory.diffbackupduration}}</td>
+            <td>{{backuphistory.tranbackupduration}}</td>
+            <td>{{backuphistory.compressed}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr class="table-primary">
+            <th scope="col">BackupHistId</th>
+            <th scope="col">InstanceId</th>
+            <th scope="col">DatabaseId</th>
+            <th scope="col">FullbackupDate</th>
+            <th scope="col">DiffBackupDate</th>
+            <th scope="col">TranBackupDate</th>
+            <th scope="col">FullBackupSize</th>
+            <th scope="col">DiffBackupSize</th>
+            <th scope="col">TranBackupSize</th>
+            <th scope="col">FullBackupDuration</th>
+            <th scope="col">DiffBackupDuration</th>
+            <th scope="col">TranBackupDuration</th>
+            <th scope="col">Compressed</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  {% else %}
+    <p> No data to display</p>
+  {% endif %}
+</div>
+
+{% endblock block_body %}

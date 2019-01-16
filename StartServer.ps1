@@ -1,5 +1,5 @@
 ﻿# First we create the request.
-$HTTP_Request = [System.Net.WebRequest]::Create('http://localhost:8000')
+$HTTP_Request = [System.Net.WebRequest]::Create('http://tul1dbapmtdb1:8000')
 
 try {
     # We then get a response from the site.
@@ -18,7 +18,7 @@ try {
 catch {
     Write-Host "The Site may be down, trying to start the site!";
     Set-Location E:\Django\SQLDBAToolsInventory;
-    python manage.py runserver;
+    python manage.py runserver tul1dbapmtdb1;
 
     return 0; #success
 }

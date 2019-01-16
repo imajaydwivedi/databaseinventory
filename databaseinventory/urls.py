@@ -18,6 +18,7 @@ from django.urls import path
 from django.conf.urls import url, include
 from . import views
 from users import views as usr_views
+from mssql import views as tsql_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),

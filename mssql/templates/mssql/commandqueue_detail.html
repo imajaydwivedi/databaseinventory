@@ -1,0 +1,61 @@
+{% extends "mssql/mssql_base.html" %}
+{% load staticfiles %}
+
+{% block block_navigation %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:index' %}">MSSQL</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:commandqueue' %}">CommandQueue</a></li>
+      <li class="breadcrumb-item active" aria-current="page">CommandQueue Details</li>
+    </ol>
+  </nav>
+{% endblock block_navigation %}
+
+{% block block_body %}
+  <div class="container">
+    <div class="card">
+      <h5 class="card-header bg-success">Welcome to CommandQueue Detail Page</h5>
+      <div class="card-body">
+        <h5 class="card-title text-primary">CommandQueue details:</h5>
+        <p class="card-text">
+          <table class="table table-bordered table-striped dbinventorytable-detail">
+            <tbody>
+              <tr class="bg-light"><td>ID</td><td>{{commandqueue_detail.id}}</td></tr>
+              <tr class="bg-transpart"><td>GUID</td><td>{{commandqueue_detail.guid}}</td></tr>
+              <tr class="bg-light"><td>InstanceId</td><td>{{commandqueue_detail.instanceid}}</td></tr>
+              <tr class="bg-transpart"><td>DatabaseId</td><td>{{commandqueue_detail.databaseid}}</td></tr>
+              <tr class="bg-light"><td>Command</td><td>{{commandqueue_detail.command}}</td></tr>
+              <tr class="bg-transpart"><td>jobId</td><td>{{commandqueue_detail.jobid}}</td></tr>
+              <tr class="bg-light"><td>JobType</td><td>{{commandqueue_detail.jobtype}}</td></tr>
+              <tr class="bg-transpart"><td>Status</td><td>{{commandqueue_detail.status}}</td></tr>
+              <tr class="bg-light"><td>reason</td><td>{{commandqueue_detail.reason}}</td></tr>
+              <tr class="bg-transpart"><td>priority</td><td>{{commandqueue_detail.priority}}</td></tr>              
+            </tbody>
+          </table>
+
+          <h6>SqlInstances:</h6>
+          <ul>
+          {% for sqlinstance in commandqueue_detail.sqlinstances.all %}
+            <li><a href="#">{{sqlinstance.sqlinstance}}</a></li>
+          {% endfor %}
+          </ul>
+
+          <h6>Databases:</h6>
+          <ul>
+          {% for database in commandqueue_detail.databases.all %}
+            <li><a href="#">{{database.databaseid}}</a></li>
+          {% endfor %}
+          </ul>
+          
+          <p>
+          <div class="container">
+            <a href="{% url 'mssql:commandqueueupdate' pk=commandqueue_detail.pk %}" class="btn btn-warning">Update</a>
+            <a href="{% url 'mssql:commandqueuedelete' pk=commandqueue_detail.pk %}" class="btn btn-danger">Delete</a>
+          </div>
+          </p>
+        </p>
+      </div>
+    </div>
+  </div>
+{% endblock block_body %}

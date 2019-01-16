@@ -1,0 +1,62 @@
+{% extends "mssql/mssql_base.html" %}
+{% load staticfiles %}
+
+{% block block_navigation %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'mssql:index' %}">MSSQL</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Database</li>
+    </ol>
+  </nav>
+{% endblock block_navigation %}
+
+{% block block_body %}
+<div class="container-fluid">
+  {% if databases %}
+    <div class="table-responsive">
+      <!-- <table id="tivotabledata" class="table table-bordered table-hover table-sm tivotabledata">  -->
+      <table id="dbinventorytable" class="dbinventorytable-list">  
+        <thead>
+          <tr class="table-primary">
+            <th scope="col">DatabaseId</th>
+            <th scope="col">InstanceId</th>
+            <th scope="col">DatabaseName</th>
+            <th scope="col">CreatedDate</th>
+            <th scope="col">RecoveryModel</th>
+            <th scope="col">CurrentDBSize</th>
+            <th scope="col">BackupPath</th>
+          </tr>
+        </thead>
+        <tbody class="table-hover">
+        {% for database in databases %}
+          <tr>
+            <td><a href="{{database.databaseid}}">{{database.databaseid}}</a></td>
+            <td><a href="{% url 'mssql:instancedetail' database.instanceid.pk %}">{{database.instanceid}}</a></td>
+            <td><a href="{{database.databaseid}}">{{database.databasename}}</a></td>
+            <td>{{database.createddate}}</td>
+            <td>{{database.recoverymodel}}</td>
+            <td>{{database.currentdbsize}}</td>
+            <td>{{database.backuppath}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr class="table-primary">
+            <th scope="col">DatabaseId</th>
+            <th scope="col">InstanceId</th>
+            <th scope="col">DatabaseName</th>
+            <th scope="col">CreatedDate</th>
+            <th scope="col">RecoveryModel</th>
+            <th scope="col">CurrentDBSize</th>
+            <th scope="col">BackupPath</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  {% else %}
+    <p> No data to display</p>
+  {% endif %}
+</div>
+
+{% endblock block_body %}
